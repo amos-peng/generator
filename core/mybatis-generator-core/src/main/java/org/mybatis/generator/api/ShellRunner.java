@@ -60,7 +60,7 @@ public class ShellRunner {
         Map<String, String> arguments = parseCommandLine(args);
         
         arguments.clear();
-        arguments.put("-configfile", "D:/work/gitws/zjez_service_base/mybatis-generator/generator2.xml");
+        arguments.put("-configfile", "./generator.xml");
         arguments.put("-overwrite", "");
 
         if (arguments.containsKey(HELP_1)) {

@@ -15,11 +15,9 @@
  */
 package org.mybatis.generator.codegen.mybatis3.javamapper.elements;
 
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
@@ -31,53 +29,50 @@ import org.mybatis.generator.api.dom.java.Parameter;
  * @author Pengyn
  * 
  */
-public class SelectListMethodGenerator extends
-        AbstractJavaMapperMethodGenerator {
+public class SelectListMethodGenerator extends AbstractJavaMapperMethodGenerator {
 
-    private boolean isSimple;
-    
-    public SelectListMethodGenerator(boolean isSimple) {
-        super();
-        this.isSimple = isSimple;
-    }
+	private boolean isSimple;
 
-    @Override
-    public void addInterfaceElements(Interface interfaze) {
-        Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
-        Method method = new Method();
-        method.setVisibility(JavaVisibility.PUBLIC);
+	public SelectListMethodGenerator(boolean isSimple) {
+		super();
+		this.isSimple = isSimple;
+	}
 
-        FullyQualifiedJavaType returnType = introspectedTable.getRules()
-                .calculateAllFieldsClass();
-        method.setReturnType(returnType);
-        importedTypes.add(returnType);
+	@Override
+	public void addInterfaceElements(Interface interfaze) {
+		Set<FullyQualifiedJavaType> importedTypes = new TreeSet<FullyQualifiedJavaType>();
+		Method method = new Method();
+		method.setVisibility(JavaVisibility.PUBLIC);
 
-        method.setName(introspectedTable.getSelectListStatementId());
+		FullyQualifiedJavaType returnType = introspectedTable.getRules().calculateAllFieldsClass();
+		importedTypes.add(returnType);
 
-        FullyQualifiedJavaType parameterType;
-        if (isSimple) {
-            parameterType = new FullyQualifiedJavaType(
-                    introspectedTable.getBaseRecordType());
-        } else {
-            parameterType = introspectedTable.getRules()
-                    .calculateAllFieldsClass();
-        }
+		returnType = new FullyQualifiedJavaType("List<" + introspectedTable.getBaseRecordType() + ">");
+		method.setReturnType(returnType);
+		importedTypes.add(new FullyQualifiedJavaType("java.util.List"));
 
-        importedTypes.add(parameterType);
-        method.addParameter(new Parameter(parameterType, "record")); //$NON-NLS-1$
-        
-        addMapperAnnotations(interfaze, method);
+		method.setName(introspectedTable.getSelectListStatementId());
 
-        context.getCommentGenerator().addGeneralMethodComment(method,
-                introspectedTable);
+		FullyQualifiedJavaType parameterType;
+		if (isSimple) {
+			parameterType = new FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+		} else {
+			parameterType = introspectedTable.getRules().calculateAllFieldsClass();
+		}
 
-        if (context.getPlugins().clientSelectByPrimaryKeyMethodGenerated(
-                method, interfaze, introspectedTable)) {
-            interfaze.addImportedTypes(importedTypes);
-            interfaze.addMethod(method);
-        }
-    }
+		importedTypes.add(parameterType);
+		method.addParameter(new Parameter(parameterType, "record")); //$NON-NLS-1$
 
-    public void addMapperAnnotations(Interface interfaze, Method method) {
-    }
+		addMapperAnnotations(interfaze, method);
+
+		context.getCommentGenerator().addGeneralMethodComment(method, introspectedTable);
+
+		if (context.getPlugins().clientSelectByPrimaryKeyMethodGenerated(method, interfaze, introspectedTable)) {
+			interfaze.addImportedTypes(importedTypes);
+			interfaze.addMethod(method);
+		}
+	}
+
+	public void addMapperAnnotations(Interface interfaze, Method method) {
+	}
 }
