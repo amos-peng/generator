@@ -51,13 +51,17 @@ public class ShellRunner {
     private static final String HELP_2 = "-h"; //$NON-NLS-1$
 
     public static void main(String[] args) {
-        if (args.length == 0) {
-            usage();
-            System.exit(0);
-            return; // only to satisfy compiler, never returns
-        }
+//        if (args.length == 0) {
+//            usage();
+//            System.exit(0);
+//            return; // only to satisfy compiler, never returns
+//        }
 
         Map<String, String> arguments = parseCommandLine(args);
+        
+        arguments.clear();
+        arguments.put("-configfile", "D:/work/gitws/zjez_service_base/mybatis-generator/generator2.xml");
+        arguments.put("-overwrite", "");
 
         if (arguments.containsKey(HELP_1)) {
             usage();

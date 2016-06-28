@@ -174,7 +174,10 @@ public abstract class IntrospectedTable {
         ATTR_MYBATIS3_UPDATE_BY_EXAMPLE_WHERE_CLAUSE_ID,
         
         /** The ATT r_ mybati s3_ sq l_ provide r_ type. */
-        ATTR_MYBATIS3_SQL_PROVIDER_TYPE
+        ATTR_MYBATIS3_SQL_PROVIDER_TYPE,
+        
+      //@pengyn-add  
+        ATTR_SELECT_LIST_STATEMENT_ID
     }
 
     /** The table configuration. */
@@ -795,6 +798,10 @@ public abstract class IntrospectedTable {
         setSelectByExampleStatementId("selectByExample"); //$NON-NLS-1$
         setSelectByExampleWithBLOBsStatementId("selectByExampleWithBLOBs"); //$NON-NLS-1$
         setSelectByPrimaryKeyStatementId("selectByPrimaryKey"); //$NON-NLS-1$
+        
+        setSelectListStatementId("selectList"); //$NON-NLS-1$
+
+        
         setUpdateByExampleStatementId("updateByExample"); //$NON-NLS-1$
         setUpdateByExampleSelectiveStatementId("updateByExampleSelective"); //$NON-NLS-1$
         setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs"); //$NON-NLS-1$
@@ -958,7 +965,12 @@ public abstract class IntrospectedTable {
         internalAttributes.put(
                 InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID, s);
     }
-
+    
+    public void setSelectListStatementId(String s) {
+        internalAttributes.put(
+                InternalAttribute.ATTR_SELECT_LIST_STATEMENT_ID, s);
+    }
+    
     /**
      * Sets the select by example with blo bs statement id.
      *
@@ -1178,6 +1190,13 @@ public abstract class IntrospectedTable {
                 .get(InternalAttribute.ATTR_SELECT_BY_PRIMARY_KEY_STATEMENT_ID);
     }
 
+    
+    public String getSelectListStatementId() {
+        return internalAttributes
+                .get(InternalAttribute.ATTR_SELECT_LIST_STATEMENT_ID);
+    }
+    
+    
     /**
      * Gets the select by example with blo bs statement id.
      *
