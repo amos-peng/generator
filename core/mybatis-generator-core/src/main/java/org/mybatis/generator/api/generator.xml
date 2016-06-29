@@ -29,7 +29,8 @@
 			targetPackage="estation.service.charging.mybatis.dao" targetProject="F:\">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-		<table tableName="t_charge_switch" domainObjectName="ChargeSwitch"
+		
+		<table tableName="t_engine_box_plan" domainObjectName="DbEngineBoxPlan"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
@@ -37,6 +38,24 @@
 			<columnOverride column="UNSIGNED_BIGINT_FIELD"
 				javaType="java.lang.Object" jdbcType="LONG" />
 		</table>
-
+		
+		<table tableName="t_engine_plan" domainObjectName="DbEnginePlan"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="UNSIGNED_BIGINT_FIELD"
+				javaType="java.lang.Object" jdbcType="LONG" />
+		</table>
+		
+		<table tableName="t_engine_plan_rule" domainObjectName="DbEnginePlanRule"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="UNSIGNED_BIGINT_FIELD"
+				javaType="java.lang.Object" jdbcType="LONG" />
+		</table>
+		
 	</context>
 </generatorConfiguration>
